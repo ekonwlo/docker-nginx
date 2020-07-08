@@ -5,6 +5,7 @@ LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
 ENV NGINX_VERSION   1.19.0
 ENV NJS_VERSION     0.4.1
 ENV PKG_RELEASE     1~buster
+ENV NGINX_PORT      80
 
 RUN set -x \
 # create nginx user/group first, to be consistent throughout docker variants
@@ -104,7 +105,7 @@ COPY 10-listen-on-ipv6-by-default.sh /docker-entrypoint.d
 COPY 20-envsubst-on-templates.sh /docker-entrypoint.d
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-EXPOSE 80
+EXPOSE ${NGINX_PORT}
 
 STOPSIGNAL SIGTERM
 
